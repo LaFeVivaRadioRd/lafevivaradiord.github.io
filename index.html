@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#08298a">
-    <title> Radio GenAp</title>
+    <title>Radio GenAp</title>
 
     <!-- Añadir el favicon -->
     <link rel="icon" href="https://i.ibb.co/JsJQF20/tresz.png" type="image/x-icon">
@@ -25,9 +25,9 @@
 
         /* Estilos para la imagen del cover */
         #player .cover-image {
-            width: 150px; /* Cambia el tamaño según lo desees */
-            height: 150px; /* Cambia el tamaño según lo desees */
-            box-shadow: 0 1px 51px rgba(0, 0, 0, 0.3); /* Sombra reducida */
+            width: 150px;
+            height: 150px;
+            box-shadow: 0 1px 51px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -38,26 +38,33 @@
     <header id="header">
         <nav class="nav-menu">
             <ul>
-                <li><a target="_blank" href="https://play.google.com/store/apps/details?id=la.fevivaradiord&pcampaignid=web_share"><i class="fab fa-google-play"></i> <span>Descarga nuestra APP</span></a></li>
-                <li><a target="_blank" href="https://www.facebook.com/profile.php?id=100079504009161"><i class="fab fa-facebook-square" alt="Facebook"></i><span>Facebook</span></a></li>
-                <li>
-                    <a href="https://api.whatsapp.com/send?phone=19736368202&text=Hola%20escucho%20la%20radio" target="_blank">
-                        <i class="fab fa-whatsapp-square" alt="Whatsapp"></i>
-                        <span>Whatsapp</span>
-                    </a>
-                </li>
-                <li>
-                    <a target="_blank" href="https://apps.apple.com/us/app/la-fe-viva-radio-rd/id6670492434"><i class="fab fa-apple" alt="App Store"></i><span>Tienda de iOS</span></a>
-                </li>
-                <li><a target="_blank" href="https://www.instagram.com/lafevivaradioofficial/"><i class="fab fa-instagram"></i><span>Instagram</span></a></li>
+                  <li><a href="https://www.facebook.com" title="Facebook" target="blank"><i class="fa fa-facebook"></i></a></li> 
+        	    
+        <li><a href="https://www.instagram.com/lafevivaradioofficial/" title="Instagram" target="blank"><i class="fa fa-instagram"></i></a></li>
+        
+        <li><a href="https://api.whatsapp.com/send?phone=+19736368202&text=Dios%20Les%20Bendiga%20?%C2%A1%20Tengo%20una%20petici%C3%B3n" title="Mensaje con WhatsApp" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+        
+        <li><a href="https://youtube.com/" title="Youtube" target="blank"><i class="fa fa-youtube"></i></a></li>
+        
+        
+        <li><a href="https://play.google.com/" title="Android" target="blank"><i class="fa fa-android"></i></a></li>
+        
+        
+         <li><a href="https://apps.apple.com/us/app/la-fe-viva-radio-rd/id6670492434" title="Apple" target="blank"><i class="fa fa-apple"></i></a></li>
+        
+        <li><a href="https://www.google.com/" title="Website" target="blank"><i class="fa fa-globe"></i></a></li>
+        
+       
+        
+        
+        </li>  
             </ul>
         </nav>
     </header>
 
     <div id="player"></div>
     <script>
-        // Inicializa el reproductor de radio
-        $("#player").lunaradio({
+        const radio = $("#player").lunaradio({
             userinterface: "big",
             backgroundcolor: "rgba(9,15,25,0.8)",
             fontcolor: "#ffffff",
@@ -65,26 +72,17 @@
             fontname: "Saira Condensed",
             googlefont: "Saira+Condensed:wght@100",
             fontratio: "0.4",
-            radioname: "La Fé Viva ",
+            radioname: "Live Music",
             scroll: "false",
             coverimage: "https://i.ibb.co/JsJQF20/tresz.png",
             onlycoverimage: "false",
             coverstyle: "animated",
             usevisualizer: "real",
             visualizertype: "2",
-            itunestoken: "",
-            metadatatechnic: "fallback",
-            corsproxy: "",
-            usestreamcorsproxy: "false",
             streamurl: "https://s1.suenalive.com:7377",
             streamtype: "zeno",
-            idzeno: "",
-            icecastmountpoint: "",
-            shoutcastpath: "",
-            shoutcastid: "1",
             metadatainterval: "26000",
             volume: "100",
-            debug: "false",
             autoplay: "true",
             displayliveicon: "true",
             visualizeropacity: "1.0",
@@ -94,6 +92,22 @@
             color3: "#FF1F6F",
             color4: "#FF1F6F",
         });
+
+        // Mantener la radio reproduciendo en segundo plano
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                radio.lunaradio('play');
+            } else {
+                radio.lunaradio('play');
+            }
+        });
+
+        // Evitar que la radio se detenga en segundo plano (reintentar cada 5 segundos)
+        setInterval(() => {
+            if (document.hidden) {
+                radio.lunaradio('play');
+            }
+        }, 5000);
     </script>
 
     <div class="background_hora">
@@ -120,16 +134,6 @@
         $("body").toggleClass("mobile-nav-active");
         $(".mobile-nav-toggle i").toggleClass("fa-bars fa-times");
     });
-
-    // Registro del Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-            console.log('Service Worker registrado con éxito:', registration);
-        }).catch(function(error) {
-            console.log('Error al registrar el Service Worker:', error);
-        });
-    }
 </script>
-
 </body>
 </html>

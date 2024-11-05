@@ -6,9 +6,7 @@
     <meta name="theme-color" content="#08298a">
     <title>La Fe Viva Radio Rd</title>
 
-    <!-- Añadir el favicon -->
     <link rel="icon" href="https://i.postimg.cc/rp1ksqYY/Dise-o-sin-t-tulo.png" type="image/x-icon">
-
     <link href="css/style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -22,8 +20,6 @@
             flex-direction: column;
             color: #272829;
         }
-
-        /* Estilos para la imagen del cover */
         #player .cover-image {
             width: 150px;
             height: 150px;
@@ -42,13 +38,12 @@
                 <li><a target="_blank" href="https://www.facebook.com/profile.php?id=100079504009161"><i class="fab fa-facebook-square"></i><span>Facebook</span></a></li>
                 <li><a href="https://api.whatsapp.com/send?phone=19736368202&text=Hola%20escucho%20la%20radio" target="_blank"><i class="fab fa-whatsapp-square"></i><span>Whatsapp</span></a></li>
                 <li>
-    <a target="_blank" href="https://apps.apple.com/us/app/la-fe-viva-radio-rd/id6670492434">
-        <i class="fab fa-apple"></i>
-        <span>Apple</span>
-    </a>
-</li>
+                    <a target="_blank" href="https://apps.apple.com/us/app/la-fe-viva-radio-rd/id6670492434">
+                        <i class="fab fa-apple"></i>
+                        <span>Apple</span>
+                    </a>
+                </li>
                 <li><a target="_blank" href="https://www.instagram.com/lafevivaradioofficial"><i class="fab fa-instagram"></i><span>Instagram</span></a></li>
-                
             </ul>
         </nav>
     </header>
@@ -88,6 +83,7 @@
         document.addEventListener("visibilitychange", function() {
             if (document.hidden) {
                 radio.lunaradio('play');
+                showNotification();
             } else {
                 radio.lunaradio('play');
             }
@@ -97,8 +93,24 @@
         setInterval(() => {
             if (document.hidden) {
                 radio.lunaradio('play');
+                showNotification();
             }
         }, 5000);
+
+        // Mostrar notificación
+        function showNotification() {
+            if (Notification.permission === "granted") {
+                new Notification("La Fe Viva Radio", {
+                    body: "La radio está reproduciendo en segundo plano.",
+                    icon: "https://i.postimg.cc/rp1ksqYY/Dise-o-sin-t-tulo.png"
+                });
+            }
+        }
+
+        // Solicitar permiso para notificaciones
+        if (Notification.permission !== "denied") {
+            Notification.requestPermission();
+        }
     </script>
 
     <div class="background_hora">
@@ -126,5 +138,6 @@
         $(".mobile-nav-toggle i").toggleClass("fa-bars fa-times");
     });
 </script>
+
 </body>
 </html>

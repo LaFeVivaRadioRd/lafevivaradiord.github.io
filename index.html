@@ -23,12 +23,12 @@
             color: #272829;
         }
 
-      /* Estilos para la imagen del cover */
-#player .cover-image {
-    width: 150px; /* Cambia el tamaño según lo desees */
-    height: 150px; /* Cambia el tamaño según lo desees */
-    box-shadow: 0 1px 51px rgba(0, 0, 0, 0.3); /* Sombra reducida */
-}
+        /* Estilos para la imagen del cover */
+        #player .cover-image {
+            width: 150px; /* Cambia el tamaño según lo desees */
+            height: 150px; /* Cambia el tamaño según lo desees */
+            box-shadow: 0 1px 51px rgba(0, 0, 0, 0.3); /* Sombra reducida */
+        }
     </style>
 </head>
 
@@ -38,32 +38,25 @@
     <header id="header">
         <nav class="nav-menu">
             <ul>
-                <li><a target="_blank" href=" https://play.google.com/store/apps/details?id=la.fevivaradiord&pcampaignid=web_share"><i class="fab fa-google-play"></i> <span>Descarga nuestra APP</span></a></li>
-                
-                    </a>
-                </li>
+                <li><a target="_blank" href="https://play.google.com/store/apps/details?id=la.fevivaradiord&pcampaignid=web_share"><i class="fab fa-google-play"></i> <span>Descarga nuestra APP</span></a></li>
                 <li><a target="_blank" href="https://www.facebook.com/profile.php?id=100079504009161"><i class="fab fa-facebook-square" alt="Facebook"></i><span>Facebook</span></a></li>
                 <li>
                     <a href="https://api.whatsapp.com/send?phone=19736368202&text=Hola%20escucho%20la%20radio" target="_blank">
                         <i class="fab fa-whatsapp-square" alt="Whatsapp"></i>
                         <span>Whatsapp</span>
                     </a>
-                <li>
-    <a target="_blank" href="https://apps.apple.com/us/app/la-fe-viva-radio-rd/id6670492434"><i class="fab fa-apple" alt="App Store"></i><span>Tienda de iOS</span></a>
-</li>
-
                 </li>
-                
+                <li>
+                    <a target="_blank" href="https://apps.apple.com/us/app/la-fe-viva-radio-rd/id6670492434"><i class="fab fa-apple" alt="App Store"></i><span>Tienda de iOS</span></a>
+                </li>
                 <li><a target="_blank" href="https://www.instagram.com/lafevivaradioofficial/"><i class="fab fa-instagram"></i><span>Instagram</span></a></li>
-                
-
-
             </ul>
         </nav>
     </header>
 
     <div id="player"></div>
     <script>
+        // Inicializa el reproductor de radio
         $("#player").lunaradio({
             userinterface: "big",
             backgroundcolor: "rgba(9,15,25,0.8)",
@@ -127,6 +120,16 @@
         $("body").toggleClass("mobile-nav-active");
         $(".mobile-nav-toggle i").toggleClass("fa-bars fa-times");
     });
+
+    // Registro del Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            console.log('Service Worker registrado con éxito:', registration);
+        }).catch(function(error) {
+            console.log('Error al registrar el Service Worker:', error);
+        });
+    }
 </script>
+
 </body>
 </html>
